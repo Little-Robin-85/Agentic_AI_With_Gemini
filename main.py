@@ -12,7 +12,7 @@ from functions.run_python_file import run_python_file, schema_run_python_file
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
-
+from call_function import call_function
 
 # region Logging & Warning Configuration
 warnings.filterwarnings("ignore")
@@ -94,9 +94,10 @@ def main ():
 
     if response.function_calls:
         for function_call_part in response.function_calls:
-            print(f"Calling function: {function_call_part.name}({function_call_part})")
+            result = call_function(function_call_part, verbose_flag)
+            print(result)
     else:
-        print(response. text)
+        print(response.text)
 
 
  
